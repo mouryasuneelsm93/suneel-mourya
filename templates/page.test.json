@@ -1,11 +1,102 @@
 {
-    "sections":{
-        "banner":{
-            "type":"task-banner"
+  "sections": {
+    "banner": {
+      "type": "task-banner",
+      "blocks": {
+        "header_content_EczkDy": {
+          "type": "header_content",
+          "settings": {
+            "heading": "TISSO VISON",
+            "content": "<p>Find the ideal gift for your loved ones.<\/p>",
+            "btn_label": "CHOOSE GIFT",
+            "btn_link": "#"
+          }
+        },
+        "content_box_8bM4eg": {
+          "type": "content_box",
+          "settings": {
+            "heading": "The Gift Guide",
+            "content": "<p>Discover Joy: Your Ultimate Holiday Gift Destination.<\/p><p> Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.<\/p>",
+            "btn_label": "SHOP NOW",
+            "btn_link": ""
+          }
         }
+      },
+      "block_order": [
+        "header_content_EczkDy",
+        "content_box_8bM4eg"
+      ],
+      "settings": {
+        "footer_text": "<p>SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL<\/p>"
+      }
     },
-    "order":[
-            "banner"
-    ]
+    "task_grid_mUkcW7": {
+      "type": "task-grid",
+      "blocks": {
+        "product_nKBmTQ": {
+          "type": "product",
+          "settings": {
+            "product": "black-leather-bag",
+            "top": 57,
+            "left": 46
+          }
+        },
+        "product_UAMRxV": {
+          "type": "product",
+          "settings": {
+            "product": "blue-silk-tuxedo",
+            "top": 46,
+            "left": 68
+          }
+        },
+        "product_aDmURA": {
+          "type": "product",
+          "settings": {
+            "product": "chequered-red-shirt",
+            "top": 17,
+            "left": 55
+          }
+        },
+        "product_3DHWGn": {
+          "type": "product",
+          "settings": {
+            "product": "classic-leather-jacket",
+            "top": 16,
+            "left": 62
+          }
+        },
+        "product_PHt33R": {
+          "type": "product",
+          "settings": {
+            "product": "classic-varsity-top",
+            "top": 23,
+            "left": 46
+          }
+        },
+        "product_rCHWtN": {
+          "type": "product",
+          "settings": {
+            "product": "dark-denim-top",
+            "top": 38,
+            "left": 64
+          }
+        }
+      },
+      "block_order": [
+        "product_nKBmTQ",
+        "product_UAMRxV",
+        "product_aDmURA",
+        "product_3DHWGn",
+        "product_PHt33R",
+        "product_rCHWtN"
+      ],
+      "settings": {
+        "heading": "Tisso vison in the wild"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "task_grid_mUkcW7"
+  ]
 }
-
