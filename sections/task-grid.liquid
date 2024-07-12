@@ -1,0 +1,99 @@
+{% style %}
+
+.task-product_grid {
+    margin: 4rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.product-block {
+    position: relative;
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+}
+
+.product-grid img {
+    max-width: 100%;
+    height: auto;
+}
+
+button.task_quick-add {
+    position: absolute;
+    background: unset;
+    border: unset;
+    cursor: pointer;
+}
+
+button.task_quick-add svg {
+    fill: #000;
+    background: #fff;
+    border-radius: 10px;
+}
+{% endstyle %}
+<div class="task-product_grid">
+    <div class="grid-header">
+        <h2>{{ section.settings.heading }}</h2>
+    </div>
+    <div class="product-grid">
+        {% for block in section.blocks %}
+            <div class="product-block">
+                {% assign product = block.settings.product %}
+                <img src="{{ product.featured_image | img_url:"" }}" alt="{{ produc.featured_image.alt }}">
+                <button 
+                    data-price = "{{ product.price | money }}"
+                    data-json = '{{ all_products[product] | json }}'
+                    type="button" class="task_quick-add" style="top:{{ block.settings.top }}%;left:{{ block.settings.left }}%;">
+                    <svg fill="#000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <g> <path d="M227.8,174.1v53.7h-53.7c-9.5,0-17.2,7.7-17.2,17.2s7.7,17.2,17.2,17.2h53.7v53.7c0,9.5,7.7,17.2,17.2,17.2 s17.1-7.7,17.1-17.2v-53.7h53.7c9.5,0,17.2-7.7,17.2-17.2s-7.7-17.2-17.2-17.2h-53.7v-53.7c0-9.5-7.7-17.2-17.1-17.2 S227.8,164.6,227.8,174.1z"></path> <path d="M71.7,71.7C25.5,118,0,179.5,0,245s25.5,127,71.8,173.3C118,464.5,179.6,490,245,490s127-25.5,173.3-71.8 C464.5,372,490,310.4,490,245s-25.5-127-71.8-173.3C372,25.5,310.5,0,245,0C179.6,0,118,25.5,71.7,71.7z M455.7,245 c0,56.3-21.9,109.2-61.7,149s-92.7,61.7-149,61.7S135.8,433.8,96,394s-61.7-92.7-61.7-149S56.2,135.8,96,96s92.7-61.7,149-61.7 S354.2,56.2,394,96S455.7,188.7,455.7,245z"></path> </g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% render 'task-grid_popup' %}
+{{ 'custom.js' | asset_url | script_tag }}
+{% schema %}
+{
+    "name":"Product Grid",
+    "settings": [
+        {
+            "type": "text",
+            "label": "Heading",
+            "id": "heading"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "product",
+            "name":"Product",
+            "settings":[
+                {
+                    "type": "product",
+                    "label": "Product",
+                    "id":"product"
+                },
+                {
+                    "type": "number",
+                    "label": "Button Top Value",
+                    "id": "top",
+                    "default":50
+                },
+                {
+                    "type": "number",
+                    "label": "Button Left Value",
+                    "id":"left",
+                    "default":50
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name":"Grid",
+            "category":"grid"
+        }
+    ]
+}
+{% endschema %}

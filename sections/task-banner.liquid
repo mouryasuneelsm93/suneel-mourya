@@ -1,10 +1,195 @@
+{% style %}
+
+/* task header design */
+
+.task-header {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    background: #F4F4F5;
+    z-index:3;
+}
+
+/* header button */
+
+a.button.header_link-btn {
+    background: #FEF545;
+    border: 1px solid #FEF545;
+    color: #000;
+}
+a.button.header_link-btn::after{
+    all:unset;
+}
+
+.task-header .button::before {
+    all:unset;
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    transform:scaleX(0);
+    transition:300ms ease;
+}
+
+.task-header .button::hover::before {
+    transform:scaleX(1);
+}
+
+
+.content-box .button::before {
+    all:unset;
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:yellow;
+    transform:scaleX(0);
+    transition:300ms ease;
+}
+
+.content-box .button::hover::before {
+    transform:scaleX(1);
+}
+/* banner image and text box */
+
+.image-with_text{
+    position:relative;
+}
+
+.image-with_text>img{
+    object-fit:cover;
+    object-position:center center;
+}
+
+/* content box design */
+
+p {
+    margin: 0;
+}
+
+.content-box {
+    position: absolute;
+    width: 489px;
+    background: #ccc;
+    bottom: 10%;
+    left: 10%;
+    padding: 3rem;
+}
+.content {
+    margin-bottom: 2rem;
+}
+
+.footer_content{
+    text-align:center;
+}
+{% endstyle %}
 <div class="task-banner_wrapper">
+    <div class="task-header">
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'header_content' %}
+                    <h1>{{ block.settings.heading }}</h1>
+                    <div class="header-content">{{ block.settings.content }}</div>
+                    <a href="{{ block.settings.btn_link }}" class="button header_link-btn">{{ block.settings.btn_label }}</a>
+            {% endcase %}
+        {% endfor %}
     </div>
+    <div class="image-with_text">
+        {% if section.settings.image  %}
+            <img src="" width="100%" height="100%" />
+        {% else %}
+            {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+        <div class="content-box">
+            {% for block in section.blocks %}
+                {% case block.type %}
+                    {% when 'content_box' %}
+                        <div class="content-wrapper">
+                            <h3>{{ block.settings.heading }}</h3>
+                            <div class="content">{{ block.settings.content }}</div>
+                            <a href="{{ block.settings.btn_link }}" class="button content_link-btn">{{ block.settings.btn_label }}</a>
+                        </div>
+                {% endcase %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="footer_content">{{ section.settings.footer_text }}</div>
+</div>
 {% schema %}
     {
         "name":"Banner",
         "settings": [
-           
+           {
+             "type": "image_picker",
+             "label": "Image",
+             "id": "image"
+            },
+            {
+                "type":"richtext",
+                "label": "Footer text",
+                "id":"footer_text"
+            }
+        ],
+        "blocks":[
+            {
+                "type":"header_content",
+                "name":"Header content",
+                "settings":[
+                    {
+                        "type":"text",
+                        "label":"Heading",
+                        "id":"heading"
+                    },
+                    {
+                        "type":"richtext",
+                        "label":"Content",
+                        "id":"content"
+                    },
+                    {
+                        "type":"text",
+                        "label":"Button Label",
+                        "id":"btn_label"
+                    },
+                    {
+                        "type":"url",
+                        "label":"Button Link",
+                        "id":"btn_link"
+                    }
+                ]
+            },
+            {
+                "type": "content_box",
+                "name":"Content Box",
+                "settings": [
+                    {
+                        "type":"text",
+                        "label":"Heading",
+                        "id":"heading"
+                    },
+                    {
+                        "type":"richtext",
+                        "label":"Content",
+                        "id":"content"
+                    },
+                    {
+                        "type":"text",
+                        "label":"Button Label",
+                        "id":"btn_label"
+                    },
+                    {
+                        "type":"url",
+                        "label":"Button Link",
+                        "id":"btn_link"
+                    }
+                ]
+            }
         ]
     }
 {% endschema %}

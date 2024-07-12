@@ -1,0 +1,68 @@
+{% style %}
+      .popup{
+          display:none;
+          position:fixed;
+          z-index:1;
+          left:0;
+          top:0;
+          width:100%;
+          height:100%;
+          overflow:auto;
+          background:rgba(0,0,0,.5);
+      }
+      .popup-content{
+          background:#fefefe;
+          margin:15% auto;
+          padding:20px;
+          border:1px solid #888;
+          width:40%;
+          position:relative;
+      }
+
+      .product_information {
+            display: flex;
+            gap: 1rem;
+        }
+
+      .popup-left, .popup-right{
+          flex:1
+      }
+
+      .product_information img{
+          max-width:100%;
+          height:auto;
+      }
+      .product_information h2{
+        margin:0;
+      }
+
+      .close{
+          position:absolute;
+          color:#aaa;
+          float:right;
+          font-size:28px;
+          top:0;
+          right:16px;
+      }
+      .addToCart{
+        margin-top:4rem;
+      }
+{% endstyle %}
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <span class="close" onclick="hidePopup()">&times;</span>
+    <div class="product_information">
+      <div class="product-media">
+        <img src="" class="product-image">
+      </div>
+      <div class="product-data">
+        <h2 class="product_title"></h2>
+        <h3 class="product_price"></h3>
+        <div class="product_description"></div>
+      </div>
+    </div>
+    <div class="variant_wrapper"></div>
+
+    <button class="addToCart button" type="button">{{ "ADD TO CART" }}</button>
+  </div>
+</div>
