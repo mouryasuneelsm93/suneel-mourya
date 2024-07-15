@@ -142,6 +142,16 @@ input[data-id=tabs-3]:checked~.glider{
   .addToCart {
     margin-top: 4rem;
   }
+  .addToCart svg path {
+    stroke: #fff!important;
+    stroke-width: .8px!important;
+}
+  @media(max-width:667px){
+    .product_information{
+      width:100%;
+      overflow:hidden;
+    }
+  }
 {% endstyle %}
 <div class="popup" id="popup">
   <div class="product_information">
@@ -161,7 +171,10 @@ input[data-id=tabs-3]:checked~.glider{
       <form action="/cart/add" method="post">
         <input type="hidden" name="id" value="" class="product-variant-id" id="product-variant-id">
         <p class="error hidden">{{ 'Sold out' }}</p>
-        <button class="addToCart button" disabled>{{ 'Add to cart' }}</button>
+        <button class="addToCart button" disabled>
+          <span>{{ 'Add to cart' }}</span>
+          <svg fill="#fff" width="40px" height="40px" viewBox="0 0 24 24" id="right-arrow" xmlns="http://www.w3.org/2000/svg" class="icon line"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.24000000000000005"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M3,12H21m-3,3,3-3L18,9" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:0.36;"></path></g></svg>
+        </button>
       </form>
     </div>
   </div>

@@ -46,7 +46,11 @@
   .custom_btn.button:hover::before {
     transform: scaleX(1);
   }
-
+ 
+.custom_btn.button:hover svg path {
+    stroke-width: .8px!important;
+    stroke: #fff!important;
+  }
   /* header drawer for mobile view */
   @media (min-width: 667px) {
     header-drawer {
