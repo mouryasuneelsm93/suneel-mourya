@@ -1,5 +1,14 @@
 {
   "sections": {
+    "task_header_rK7LaV": {
+      "type": "task-header",
+      "settings": {
+        "heading": "TISSO VISON",
+        "content": "<p>Find the ideal gift for your loved ones.<\/p>",
+        "btn_label": "CHOOSE GIFT",
+        "btn_link": "#"
+      }
+    },
     "banner": {
       "type": "task-banner",
       "blocks": {
@@ -96,6 +105,7 @@
     }
   },
   "order": [
+    "task_header_rK7LaV",
     "banner",
     "task_grid_mUkcW7"
   ]
