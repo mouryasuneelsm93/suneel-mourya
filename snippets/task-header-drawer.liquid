@@ -1,0 +1,116 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+{% style %}
+  /* drawer  */
+
+  .custom-body {
+    overflow: hidden;
+  }
+
+  div#menu-drawer {
+    position: fixed;
+    width: 100%;
+    z-index: 99;
+    top: 80px;
+    left: 0;
+    background: #eee;
+    border: 1px solid #ddd;
+  }
+
+  .header__icon--menu[aria-expanded='true']:before {
+    content: none;
+  }
+
+  ul.menu-drawer__menu.has-submenu.list-menu {
+    list-style: none;
+    padding: 0;
+    padding-inline: 4rem;
+    text-align: center;
+  }
+  h2.drawer-heading {
+    position: relative;
+    background: #f7f7f7;
+    padding: 1rem;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+  .drawer-heading svg {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    left: 18px;
+  }
+
+  #menu-drawer .button {
+    margin-top: 1rem;
+  }
+  #menu-drawer .button::before,
+  #menu-drawer .button::after {
+    all: unset;
+  }
+{% endstyle %}
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container">
+    <summary
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      aria-label="{{ 'sections.header.menu' | t }}"
+    >
+      <span>
+        {% render 'icon-hamburger' %}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+      <div class="menu-drawer__inner-container">
+        <div class="menu-drawer__navigation-container">
+          <nav class="menu-drawer__navigation">
+            <ul class="menu-drawer__menu has-submenu list-menu" role="list">
+              <li>
+                <h2 class="drawer-heading">
+                  {% render 'icon-close' %}
+                  <span> {{ section.settings.heading }}</span>
+                </h2>
+              </li>
+              <li>
+                <div class="header-content">{{ section.settings.content }}</div>
+              </li>
+              <li>
+                <a href="{{ section.settings.btn_link }}" class="button custom_btn">
+                  <span>{{- section.settings.btn_label -}}</span>
+                  <svg
+                    fill="#000000"
+                    width="40px"
+                    height="40px"
+                    viewBox="0 0 24 24"
+                    id="right-arrow"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon line"
+                  >
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.24000000000000005"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M3,12H21m-3,3,3-3L18,9" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:0.36;"></path></g>
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </details>
+</header-drawer>
+<script>
+  /* script for adding class in body on click of hamburger icon */
+
+  document.querySelector('.icon-hamburger').addEventListener('click', function (evt) {
+    document.querySelector('body').classList.toggle('custom-body');
+  });
+
+  /* script for remove class from body and open attribute on click of close icon */
+
+  document.querySelector('.icon-close').addEventListener('click', function (evt) {
+    this.closest('.menu-drawer-container').removeAttribute('open');
+    document.querySelector('body').classList.remove('custom-body');
+  });
+</script>

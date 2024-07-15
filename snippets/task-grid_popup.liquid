@@ -1,60 +1,154 @@
 {% style %}
-      .popup{
-          display:none;
-          position:fixed;
-          z-index:1;
-          left:0;
-          top:0;
-          width:100%;
-          height:100%;
-          overflow:auto;
-          background:rgba(0,0,0,.5);
-      }
-      .popup-content{
-          background:#fefefe;
-          margin:15% auto;
-          padding:20px;
-          border:1px solid #888;
-          width:40%;
-          position:relative;
-      }
+  .popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    place-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-      .product_information {
-            display: flex;
-            gap: 1rem;
-        }
+  .product_information {
+    position: relative;
+    background: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 645px;
+    max-width: 90%;
+  }
+  .popup-content {
+    display: flex;
+    gap: 1rem;
+  }
 
-      .popup-left, .popup-right{
-          flex:1
-      }
+  .product-media,
+  .product-data {
+    flex: 1;
+  }
 
-      .product_information img{
-          max-width:100%;
-          height:auto;
-      }
-      .product_information h2{
-        margin:0;
-      }
+  img.product-image {
+    max-width: 100%;
+    height: auto;
+  }
+  .close {
+    position: absolute;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    top: 0;
+    right: 16px;
+    cursor: pointer;
+  }
 
-      .close{
-          position:absolute;
-          color:#aaa;
-          float:right;
-          font-size:28px;
-          top:0;
-          right:16px;
-          cursor:pointer;
-      }
-      .addToCart{
-        margin-top:4rem;
-      }
+  /* variant wrapper css */
+
+  .variant-wrapper h3 {
+    margin-block: 8px;
+}
+
+/* color variant css */
+
+.variant_color-option {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+}
+
+.variant_color-option label {
+    border: 1px solid #000;
+    padding: 8px 12px;
+    min-width: 200px;
+    text-align: center;
+    cursor: pointer;
+}
+
+input:checked + label{
+  color:#fff;
+}
+
+/* select dropdown css */
+
+.select-dropdown {
+    position: relative;
+}
+
+button.select-dropdown__button {
+    display: flex;
+    background: #fff;
+    color: #616161;
+    border: 1px solid #cecece;
+    cursor: pointer;
+    justify-content: space-between;
+    padding-block: 16px;
+    padding-inline: 15px;
+    width:100%;
+}
+
+.select-dropdown__list {
+    border: 1px solid #000;
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    max-height: 300px;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: top left;
+    transform: scale(1,0);
+    transition: all ease-in-out 0.3s;
+    z-index: 2;
+}
+.select-dropdown__list.active{
+  opacity:1;
+  pointer-events:auto;
+  transform:scale(1,1);
+  background:#fff;
+  text-align:center;
+}
+.select-dropdown__list li:hover{
+  background:#000;
+  color:#fff;
+}
+.glider{
+  position:absolute;
+  display:flex!important;
+  height:46px;
+  width:200px;
+  background:#000;
+  z-index:-1;
+  transition:0.25s ease-out;
+  transform:translate(-100%)
+}
+input[data-id=tabs-1]:checked~.glider{
+  transform:translate(0);
+}
+input[data-id=tabs-2]:checked~.glider{
+  transform:translate(100%);
+}
+input[data-id=tabs-3]:checked~.glider{
+  transform:translate(200%);
+}
+  .addToCart {
+    margin-top: 4rem;
+  }
 {% endstyle %}
 <div class="popup" id="popup">
-  <div class="popup-content">
+  <div class="product_information">
     <span class="close" onclick="hidePopup()">&times;</span>
-    <div class="product_information">
+    <div class="popup-content">
       <div class="product-media">
-        <img src="" class="product-image">
+        <img src="" id="product--image" class="product-image">
       </div>
       <div class="product-data">
         <h2 class="product_title"></h2>
@@ -62,8 +156,13 @@
         <div class="product_description"></div>
       </div>
     </div>
-    <div class="variant_wrapper"></div>
-
-    <button class="addToCart button" type="button">{{ "ADD TO CART" }}</button>
+    <div class="variant-wrapper"></div>
+    <div class="btn-wrapper">
+      <form action="/cart/add" method="post">
+        <input type="hidden" name="id" value="" class="product-variant-id" id="product-variant-id">
+        <p class="error hidden">{{ 'Sold out' }}</p>
+        <button class="addToCart button" disabled>{{ 'Add to cart' }}</button>
+      </form>
+    </div>
   </div>
 </div>

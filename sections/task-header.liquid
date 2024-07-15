@@ -1,0 +1,115 @@
+{% style %}
+  /* task header design */
+
+  .task-header {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    background: #f4f4f5;
+    z-index: 3;
+  }
+
+  .task-header h1{
+    font-weight:bold;
+  }
+  /* header button */
+
+  a.button.custom_btn {
+    z-index: 1;
+    background: yellow;
+    color: #000;
+  }
+  a.button.custom_btn::after {
+    all: unset;
+  }
+
+  .custom_btn.button::before {
+    all: unset;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000 !important;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 300ms ease;
+    z-index: -1;
+  }
+
+  .custom_btn.button:hover {
+    color: #fff;
+  }
+  .custom_btn.button:hover::before {
+    transform: scaleX(1);
+  }
+
+  /* header drawer for mobile view */
+  @media (min-width: 667px) {
+    header-drawer {
+      display: none;
+    }
+  }
+  @media (max-width: 667px) {
+    .task-header {
+      position: unset;
+    }
+    .header-content.for_desktop {
+      display: inline;
+    }
+    .header-content.for_desktop p {
+      display: none;
+    }
+    a.button.custom_btn.for_desktop {
+      display: none;
+    }
+  }
+{% endstyle %}
+
+<div class="custom-header">
+  <div class="task-header">
+    {% render 'task-header-drawer' %}
+    <h1>{{ section.settings.heading }}</h1>
+    <div class="header-content for_desktop">{{ section.settings.content }}</div>
+    <a href="{{ section.settings.btn_link }}" class="button custom_btn for_desktop">
+      <span>{{ section.settings.btn_label }}</span>
+      <svg fill="#000000" width="40px" height="40px" viewBox="0 0 24 24" id="right-arrow" xmlns="http://www.w3.org/2000/svg" class="icon line"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.24000000000000005"></g><g id="SVGRepo_iconCarrier"><path id="primary" d="M3,12H21m-3,3,3-3L18,9" style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width:0.36;"></path></g></svg>
+        </a>
+    </div>
+</div>
+{% schema %}
+{
+  "name": "Task header",
+  "settings": [
+    {
+      "type": "text",
+      "label": "Heading",
+      "id": "heading"
+    },
+    {
+      "type": "richtext",
+      "label": "Content",
+      "id": "content"
+    },
+    {
+      "type": "text",
+      "label": "Button Label",
+      "id": "btn_label"
+    },
+    {
+      "type": "url",
+      "label": "Button Link",
+      "id": "btn_link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Task header",
+      "category": "header"
+    }
+  ]
+}
+{% endschema %}
